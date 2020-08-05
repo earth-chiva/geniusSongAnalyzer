@@ -37,7 +37,7 @@ class songInfo(object):
                 validateSoup = str(self.soup.find("h1", class_="SongHeader__Title-sc-1b7aqpg-7 jQiTNQ").get_text())
             except:
                 continue
-        self.lyric = lyricExtracter(self.soup).get_text(separator='\n')
+        self.lyric = lyricExtracter(self.soup).get_text(separator='\n').replace(', \n, \n','')
         self.songName = "Could not retrieve ..."
         self.bandName = "Could not retrieve ..."
         self.dateReleased = datetime.date(1, 1, 1)
@@ -70,7 +70,7 @@ class songInfo(object):
         except:
             pass
     def lyricLetterCount(self):
-        tmpString = self.lyric.replace(',', ' ').replace('(',' ').replace(')',' ')
+        tmpString = self.lyric.replace(',', ' ').replace('(',' ').replace(')',' ').replace(', \n, \n','')
         tmpString = re.sub(r'\[[a-zA-Z0-9\-\s]+\]',r' ',tmpString) # Delete all [...] format
         tmpString = tmpString.upper()
         hash = [0] * 26
@@ -78,4 +78,10 @@ class songInfo(object):
             numLetter = ord(i)-ord('A')
             if numLetter in range(0,26):
                 hash[numLetter] = hash[numLetter] + 1
-        print(hash)
+        return hash
+    def convertToEtaoin(self):
+        seqArrLetter = np.argsort(self.lyricLetterCount())
+        seqLetter = ""
+        for i in range(0, 26):
+            seqLetter = seqLetter + chr(seqArrLetter[i] + ord('A'))
+        return seqLetter

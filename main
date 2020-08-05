@@ -1,9 +1,57 @@
 import songObject
 import gui
+import analyze
 
 #gui.warmWelcoming()
 gui.displayMenu()
 
-urlString = "https://genius.com/Kodaline-high-hopes-lyrics"
-mySong = songObject.songInfo(urlString)
-print(gui.songDescDisplay(mySong))
+while True:
+    optNum = input("Please select your option ")
+    if optNum == '1':
+        urlString = input("Please insert the valid website : ")
+        mySong = songObject.songInfo(urlString)
+        gui.songDescDisplay(mySong)
+    if optNum == '2':
+        bufferLs = []
+        numOfInput = input("Please insert the desire number of input : ")
+        for i in range(0,int(numOfInput)):
+            urlString = input("[ Input "+str(i+1)+" ] ")
+            songBuffer = songObject.songInfo(urlString)
+            bufferLs.append(songBuffer.lyricLetterCount())
+        resultCounter = analyze.sumAlphabet(bufferLs)
+        resultString = analyze.convertToStr(resultCounter)
+        typeOfInput = input("Select type of string stat : ")
+        print(resultString)
+        print(analyze.lcs(resultString,typeOfInput))
+    if optNum == '3':
+        bufferLs = []
+        f = open("input.txt","r").readlines()
+        idx = 1
+        for i in f:
+            print("[ Input " + str(idx) + " ] " + str(i),end="")
+            songBuffer = songObject.songInfo(str(i)[:-1])
+            bufferLs.append(songBuffer.lyricLetterCount())
+            print("Finished " + str(idx) + " : " + songBuffer.songName + " | " + songBuffer.bandName)
+            idx = idx + 1
+        resultCounter = analyze.sumAlphabet(bufferLs)
+        resultString = analyze.convertToStr(resultCounter)
+        typeOfInput = input("Select type of string stat : ")
+        print(resultString)
+        print(analyze.lcs(resultString, typeOfInput))
+    if optNum == '0':
+        exit()
+## EOTINAHSRULYDMWGCBFKPVJXZQ
+## EOTINAHSRULYDMWGCBFKPVJXZQ
+'''
+https://genius.com/Kodaline-all-i-want-lyrics
+https://genius.com/Kodaline-high-hopes-lyrics
+https://genius.com/Kodaline-brother-lyrics
+https://genius.com/Kodaline-the-one-lyrics
+https://genius.com/Kodaline-follow-your-fire-lyrics
+https://genius.com/Nothing-but-thieves-if-i-get-high-lyrics
+https://genius.com/Nothing-but-thieves-graveyard-whistling-lyrics
+https://genius.com/Nothing-but-thieves-hanging-lyrics
+https://genius.com/Nothing-but-thieves-six-billion-lyrics
+https://genius.com/Nothing-but-thieves-painkiller-lyrics
+https://genius.com/Nothing-but-thieves-excuse-me-lyrics
+'''

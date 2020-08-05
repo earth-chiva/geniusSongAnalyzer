@@ -38,6 +38,11 @@ menuStr = """
           | |  | || |____ | |\  || |__| |
           |_|  |_||______||_| \_| \____/ 
 #####################################################
+ Option 0-3
+    0 Exit The Program
+    1 Retrieve Information from Website
+    2 Analyze Multiple Lyrics
+    3 Analyze Multiple Lyrics (by file)
 """
 
 def warmWelcoming():
