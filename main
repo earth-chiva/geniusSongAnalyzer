@@ -1,0 +1,9 @@
+import songObject
+import gui
+
+#gui.warmWelcoming()
+gui.displayMenu()
+
+urlString = "https://genius.com/Kodaline-high-hopes-lyrics"
+mySong = songObject.songInfo(urlString)
+print(gui.songDescDisplay(mySong))
