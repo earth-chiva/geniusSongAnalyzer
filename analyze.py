@@ -18,8 +18,8 @@ def convertToStr(hsh):
 LCS (Longest Common Subsequence)
 '''
 
-def lcs(sqLetter,type):
-    strTemp = "ETAOINSHRDLUCMFWYPVBGKJQXZ" if type == 0 else "ETOINASHRLUYDMWGCBFKPVJXZQ"
+def lcs(sqLetter):
+    strTemp = "ETAOINSHRDLUCMFWYPVBGKJQXZ"
     arr = [[0] * 27 for i in range(0,27)]
     for i in range(1,27):
         for j in range(1,27):

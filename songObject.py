@@ -28,15 +28,16 @@ class songInfo(object):
         '''
         Check until get the correct type of website into Soup (in url)
         '''
-        validateSoup = 'Pls change this shit!'
+        validateSoup = 'Pls change this'
         retryCounter = 0
-        while validateSoup == 'Pls change this shit!':
+        while validateSoup == 'Pls change this' and retryCounter < 10:
             self.soup = BeautifulSoup(get(urlString).content, 'lxml')
             retryCounter = retryCounter + 1
             try:
                 validateSoup = str(self.soup.find("h1", class_="SongHeader__Title-sc-1b7aqpg-7 jQiTNQ").get_text())
             except:
                 continue
+        assert(retryCounter < 10)
         self.lyric = lyricExtracter(self.soup).get_text(separator='\n').replace(', \n, \n','')
         self.songName = "Could not retrieve ..."
         self.bandName = "Could not retrieve ..."

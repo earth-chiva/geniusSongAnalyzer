@@ -1,6 +1,8 @@
 import time
 import datetime
 import songObject
+import matplotlib.pyplot as plt
+import numpy as np
 
 welcomeStr = """
 *****************************************************
@@ -66,3 +68,17 @@ def songDescDisplay(song):
     print("Producer : " + song.producer)
     print("Lyrics : ")
     print(song.lyric)
+
+def resultingFormat(resultCounter,resultString,lcsString):
+    objects = [chr(ord('A') + i) for i in range(0,26)]
+    y_pos = np.arange(len(objects))
+
+    plt.barh(y_pos, resultCounter, align='center', alpha=0.5)
+    plt.yticks(y_pos, objects)
+    plt.title('Number of occurrence of each letter')
+
+    plt.show()
+
+    print("The order of letter shown in lyrics from the highest frequency to the lowest : " + resultString)
+    print("One (from many) Longest Common Subsequences compared to ETAOIN SHRDLU : " + lcsString)
+    print("The percentage of similarity compared to the ETAOIN SHRDLU : " + str(len(lcsString)*100/26) + "%")
